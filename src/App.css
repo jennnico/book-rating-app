@@ -1,0 +1,76 @@
+#heading{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#container--title{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 60px 0;
+}
+
+#subheading{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-right: 10px;
+  font-size: 1.25em;
+}
+
+#userInput{
+  border-radius: 999px;
+  font-size: 1.5em;
+  padding: 10px 20px;
+}
+
+#question{
+  font-size: 1.25em;
+  margin-bottom: 30px;
+}
+
+#beets{
+  margin-top: 20px;
+
+  .beet{
+    margin: 0 20px;
+    opacity: 0.5;
+    transition: 0.2s;
+
+    &.hover{
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+}
+
+#rateButton{
+  margin-top: 40px;
+}
+
+#bookTitles{
+  list-style: none;
+  margin: 50px auto 0;
+  max-width: 728px;
+  position: relative;
+  text-align: left;
+  z-index: 2;
+
+  .book{
+    margin-bottom: 20px;
+  }
+
+  .label{
+    display: inline;
+    font-weight: bold;
+  }
+
+  .title{
+    text-transform: capitalize;
+  }
+}
+
+#bear{
+  border-radius: 40px;
+  margin-top: 40px;
+}
+
