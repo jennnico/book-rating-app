@@ -7,18 +7,18 @@ import './App.css'
 function App() {
   
   const [hoveredBeet, setHoveredBeet] = useState(null); //hover beets
-  const [selectedBeet, setSelectedBeet] = useState(""); //select beets
+  const [selectedBeet, setSelectedBeet] = useState(null); //select beets
   const [text, setText] = useState(""); //user input
   const [books, setBooks] = useState([]); //book list
 
+  //update input area
   const handleChange = (event) => {
     setText(event.target.value)
     let title = event.target.value  
   }
 
+  //add book information
   const addTitle = (event) => {
-    // let newBook = [];
-    // newBook.push({text}.text);
     let newBook = {
       title: text,
       rating: selectedBeet,
@@ -26,13 +26,13 @@ function App() {
     }
     setBooks([...books, newBook])
     setText("");
+    setSelectedBeet(null);
   }
 
+  //handle clicking a beet
   const selectBeet = (i) => {
     setSelectedBeet(i);
     const description = ratings[i]; 
-    console.log(description);
-    //use key to render text from ratings.js
   }
 
   return (
@@ -68,12 +68,12 @@ function App() {
           />
         ))}
       </div>
-      <button disabled={!selectedBeet} id="rateButton" onClick={addTitle}>Rate my book!</button> 
+      <button disabled={!text || selectedBeet === null} id="rateButton" onClick={addTitle}>Rate my book!</button> 
       <ul id="bookTitles">
           {books.map(book => (
             <li className="book" key={book.title}>
               <div className="title"><div className="label">Book Title: </div>{book.title}</div>
-              <div className="rating"><div className="label">Rating: </div>{book.rating} beets. {book.description}</div>
+              <div className="rating"><div className="label">Rating: </div>{book.rating + 1} beets. {book.description}</div>
             </li>
           ))} 
       </ul>
