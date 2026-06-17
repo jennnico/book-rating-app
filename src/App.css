@@ -56,7 +56,11 @@
   z-index: 2;
 
   .book{
+    background-color: #fff;
+    border-radius: 20px;
     margin-bottom: 20px;
+    padding: 10px 20px;
+    position: relative;
   }
 
   .label{
@@ -66,6 +70,26 @@
 
   .title{
     text-transform: capitalize;
+  }
+
+  .close{
+    align-items: center;
+    border: solid 1px #000;
+    border-radius: 50%;
+    display: flex;
+    font-weight: bold;
+    height: 1em;
+    justify-content: center;
+    padding: 10px;
+    position: absolute; top: 10px; right: 10px;
+    transition: all 0.5s ease;
+    width: 1em;
+
+    &:hover{
+      background-color: var(--accent); 
+      cursor: pointer;
+      transform: rotate(180deg);
+    }
   }
 }
 

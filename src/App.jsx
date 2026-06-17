@@ -20,6 +20,7 @@ function App() {
   //add book information
   const addTitle = (event) => {
     let newBook = {
+      id: crypto.randomUUID(),
       title: text,
       rating: selectedBeet,
       description: ratings[selectedBeet]
@@ -27,6 +28,10 @@ function App() {
     setBooks([...books, newBook])
     setText("");
     setSelectedBeet(null);
+  }
+
+  const removeTitle = (id) => {
+    setBooks(books.filter(book => book.id !== id))
   }
 
   //handle clicking a beet
@@ -58,7 +63,7 @@ function App() {
             height="165"
             alt="Beet clipart"
             className={
-              i <= hoveredBeet
+              i <= (hoveredBeet | selectedBeet)
                 ? 'beet hover'
                 : 'beet'
             }
@@ -71,9 +76,10 @@ function App() {
       <button disabled={!text || selectedBeet === null} id="rateButton" onClick={addTitle}>Rate my book!</button> 
       <ul id="bookTitles">
           {books.map(book => (
-            <li className="book" key={book.title}>
+            <li className="book" key={book.title} id={book.id}>
               <div className="title"><div className="label">Book Title: </div>{book.title}</div>
               <div className="rating"><div className="label">Rating: </div>{book.rating + 1} beets. {book.description}</div>
+              <a className="close" onClick={() => removeTitle(book.id)}>X</a>
             </li>
           ))} 
       </ul>
