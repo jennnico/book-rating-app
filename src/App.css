@@ -4,23 +4,23 @@
   line-height: 1;
 }
 
-#container--title{
+.enterTitle{
   align-items: center;
   display: flex;
   justify-content: center;
   margin: 60px 0;
-}
 
-#subheading{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-right: 10px;
-  font-size: 1.25em;
-}
+  .enterTitle__p{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    font-size: 1.25em;
+  }
 
-#userInput{
-  border-radius: 999px;
-  font-size: 1.5em;
-  padding: 10px 20px;
+  input{
+    border-radius: 999px;
+    font-size: 1.5em;
+    padding: 10px 20px;
+  }
 }
 
 #question{
@@ -72,7 +72,13 @@
     text-transform: capitalize;
   }
 
-  .close{
+  .actions{
+    align-items: center;
+    display: flex;
+    position: absolute; top: 10px; right: 10px;
+  }
+
+  .icon{
     align-items: center;
     border: solid 1px #000;
     border-radius: 50%;
@@ -80,8 +86,8 @@
     font-weight: bold;
     height: 1em;
     justify-content: center;
+    margin: 0 5px;
     padding: 10px;
-    position: absolute; top: 10px; right: 10px;
     transition: all 0.5s ease;
     width: 1em;
 
@@ -91,6 +97,24 @@
       transform: rotate(180deg);
     }
   }
+}
+ 
+#edit{
+    background: #000000d9;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 5%;
+    position: fixed; top: 0; left: 0;
+    width: 100%;
+    z-index: 2;
+
+    .enterTitle__p{
+      color: #fff;
+      margin: 0 0 30px;
+    }
+
+    button{margin-top: 20px;}
 }
 
 #bear{
