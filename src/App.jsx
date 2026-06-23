@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ratings } from './ratings.js'
 import bear from './assets/bear.jpg'
 import beet from './assets/beet.png'
 import './App.css'
 
-function App() {
+function App() { 
   
   const [hoveredBeet, setHoveredBeet] = useState(null); //hover beets
   const [selectedBeet, setSelectedBeet] = useState(null); //select beets
   const [text, setText] = useState(""); //user input
-  const [books, setBooks] = useState([]); //book list
+  // const [books, setBooks] = useState([]); //book list
   const [editVisible, setEditVisible] = useState(false); //display edit section
   const [editingBookId, setEditingBookId] = useState(null);
   const [editText, setEditText] = useState(""); //user input
@@ -17,6 +17,11 @@ function App() {
     hoveredBeet !== null
       ? hoveredBeet
       : selectedBeet;
+  //Lazy initialization of books:
+  const [books, setBooks] = useState(() => {
+    const savedBooks = localStorage.getItem('books');
+    return savedBooks ? JSON.parse(savedBooks) : [];
+  });
 
   //update input area
   const handleChange = (event) => {
@@ -55,7 +60,8 @@ function App() {
       if (book.id === editingBookId) {
         return {
           ...book,
-          title: editText
+          title: editText,
+          rating: selectedBeet
         };
       }
 
@@ -70,6 +76,17 @@ function App() {
     setBooks(books.filter(book => book.id !== id))
   }
 
+  useEffect(() => {
+    localStorage.setItem('books', JSON.stringify(books));
+  }, [books]);
+
+  // useEffect(() => {
+  //   const books = JSON.parse(localStorage.getItem('books'));
+  //   if (books) {
+  //     setBooks(books);
+  //   }
+  // }, []);
+
   return (
     <div id="container">
       <h1 id="heading">Bears. Beets. Books.</h1>
@@ -82,8 +99,8 @@ function App() {
           onChange={handleChange}
         />
       </div>
-      <p id="question">How many beets?</p>
-      <div id="beets"> 
+      <p className="question">How many beets?</p>
+      <div className="beets"> 
         {[0, 1, 2, 3, 4].map((i) => (
           <img
             key={i}
@@ -126,7 +143,31 @@ function App() {
             value={editText} 
             onChange={handleUpdate} 
           />
+          <p className="question">Update your rating:</p>
+          <div className="beets"> 
+              {[0, 1, 2, 3, 4].map((i) => (
+                <img
+                  key={i}
+                  id={i}
+                  src={beet}
+                  width="100"
+                  height="165"
+                  alt="Beet clipart"
+                  className={
+                    i <= activeBeet
+                      ? 'beet hover'
+                      : 'beet'
+                  }
+                  onMouseEnter={() => setHoveredBeet(i)}
+                  onMouseLeave={() => setHoveredBeet(null)}
+                  onClick={() => selectBeet(i)}
+                />
+              ))}
+        </div>
           <button onClick={() => {setEditVisible(false); saveEdits()}}>Update!</button>
+          <div className="actions">
+            <a className="icon close" onClick={() => setEditVisible(false)}>X</a>
+          </div>
         </div>
       )}
       <img src={bear} id="bear" width="728" height="485" alt="Bear resting on a log" />
